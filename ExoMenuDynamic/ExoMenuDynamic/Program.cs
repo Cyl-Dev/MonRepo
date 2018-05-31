@@ -30,29 +30,50 @@ namespace ExoMenuDynamic
             foreach (MenuItem item in menu)
                 Console.WriteLine($"{item.Index}.  {item.Libelle}");
 
+            Console.WriteLine();
+            Console.WriteLine("Entrer votre choix !");
 
-            int numeroMenuValide = -1;
-            while (numeroMenuValide == -1)
+            string saisie = Console.ReadLine();
+            int numeroMenu = int.Parse(saisie);
+
+            while (true)
             {
-                Console.WriteLine();
-                Console.WriteLine("Entrer votre choix !");
-
-                string saisie = Console.ReadLine();
-                int numeroMenu = int.Parse(saisie);
-
                 foreach (MenuItem item in menu)
-                {             
+                {
                     if (numeroMenu == item.Index)
                     {
-                        numeroMenuValide = numeroMenu;
-                        break;
+                        return numeroMenu;
                     }
                 }
 
-                if (numeroMenuValide == -1) Console.WriteLine("Choix Invalide !");
+                Console.WriteLine("Choix Invalide !");
+                numeroMenu = int.Parse(saisie);
             }
 
-            return numeroMenuValide;
+            /*
+                        int numeroMenuValide = -1;
+                        while (numeroMenuValide == -1)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Entrer votre choix !");
+
+                            string saisie = Console.ReadLine();
+                            int numeroMenu = int.Parse(saisie);
+
+                            foreach (MenuItem item in menu)
+                            {             
+                                if (numeroMenu == item.Index)
+                                {
+                                    numeroMenuValide = numeroMenu;
+                                    break;
+                                }
+                            }
+
+                            if (numeroMenuValide == -1) Console.WriteLine("Choix Invalide !");
+                        }
+            */
+
+  //          return numeroMenuValide;
         }
     }
 
