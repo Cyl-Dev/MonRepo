@@ -9,7 +9,6 @@ namespace ExoMenuDynamic
     class Program
     {
 
-
         static void Main(string[] args)
         {
 
@@ -29,10 +28,8 @@ namespace ExoMenuDynamic
         {
 
             foreach (MenuItem item in menu)
-            {
-                Console.Write(item.Index + ". ");
-                Console.WriteLine(item.Libelle);
-            }
+                Console.WriteLine($"{item.Index}.  {item.Libelle}");
+
 
             int numeroMenuValide = -1;
             while (numeroMenuValide == -1)
@@ -45,7 +42,11 @@ namespace ExoMenuDynamic
 
                 foreach (MenuItem item in menu)
                 {             
-                    if (numeroMenu == item.Index) { numeroMenuValide = item.Index; break; }
+                    if (numeroMenu == item.Index)
+                    {
+                        numeroMenuValide = numeroMenu;
+                        break;
+                    }
                 }
 
                 if (numeroMenuValide == -1) Console.WriteLine("Choix Invalide !");
