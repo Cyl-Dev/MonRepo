@@ -14,6 +14,9 @@ namespace ExoMenuDynamic.NewFolder1
     {
         private List<MenuItem> menuItems;
 
+        public Menu MenuParent { get; set; }
+        private MenuItem choixSousMenuItem;
+
         public Menu()
         {
             menuItems = new List<MenuItem>();
@@ -24,14 +27,65 @@ namespace ExoMenuDynamic.NewFolder1
             // Afficher le menu
             Afficher();
 
-            return Choisir();
+            int choixMenu = Choisir();
+
+            return choixMenu;
         }
+
+        public MenuItem GererMenu2()
+        {
+            // Afficher le menu
+            Afficher();
+
+            MenuItem choixMenu = Choisir2();
+
+            return choixMenu;
+        }
+
 
         public void Afficher()
         {
             foreach (MenuItem item in menuItems)
                 Console.WriteLine($"{item.Index}. {item.Libelle}");
+            Console.WriteLine("0. Retour");
         }
+
+        public MenuItem Choisir2()
+        {
+
+            // Demande une 1ere fois
+            Console.WriteLine();
+            Console.WriteLine("Entrer votre choix !");
+
+            string saisie = Console.ReadLine();
+            int numeroMenu = int.Parse(saisie);
+
+            //           if (numeroMenu == 0) return 0;
+
+            // Attend une entre valide
+            while (true)
+            {
+                // Traverse la liste pour trouver correspondance
+                foreach (MenuItem item in menuItems)
+                {
+                    Console.WriteLine(">> " + item.Index);
+
+                    if (numeroMenu == item.Index)
+                    {
+                        if (item.SousMenu == null) return item;
+                        {
+                            choixSousMenuItem = item;
+                            return item.SousMenu.GererMenu2();
+                        }
+                    };
+                }
+
+                Console.WriteLine("Choix Invalide !");
+                saisie = Console.ReadLine();
+                numeroMenu = int.Parse(saisie);
+            }
+        }
+
 
         public int Choisir()
         {
@@ -42,18 +96,29 @@ namespace ExoMenuDynamic.NewFolder1
             string saisie = Console.ReadLine();
             int numeroMenu = int.Parse(saisie);
 
-            // Attend une entre valide
-            while (true)
+ //           if (numeroMenu == 0) return 0;
+
+                // Attend une entre valide
+                while (true)
             {
                 // Traverse la liste pour trouver correspondance
                 foreach (MenuItem item in menuItems)
                 {
-                    if (numeroMenu == item.Index) return numeroMenu;
+                    Console.WriteLine(">> " + item.Index);
+
+                    if (numeroMenu == item.Index)
+                    {                     
+                        if (item.SousMenu == null) return numeroMenu;
+                        {
+                            choixSousMenuItem = item;
+                            return item.SousMenu.GererMenu(); }
+                    };
                 }
 
                 Console.WriteLine("Choix Invalide !");
                 saisie = Console.ReadLine();
                 numeroMenu = int.Parse(saisie);
+
             }
         }
 
@@ -69,6 +134,19 @@ namespace ExoMenuDynamic.NewFolder1
 
             menuItems.Add(menuItem);
         }
+
+/*
+        public string GetLibelle(int Index)
+        {
+
+            foreach(MenuItem menuItem in menuItems)
+            {
+                if (menuItem.Index == Index) return menuItem.Libelle;
+            }
+            return "";
+        }
+*/
+
 
     }
 }

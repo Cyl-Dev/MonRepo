@@ -12,14 +12,25 @@ namespace ExoMenuDynamic.NewFolder1
         /// </summary>
     public class MenuItem
     {
-            public string Libelle { get; set; }
-            public int Index { get; set; }
+        public string Libelle { get; set; }
+        public int Index { get; set; }
 
-            public MenuItem(string libelle, int index)
-            {
+        public Menu SousMenu { get; set; }
+        private Menu parentMenu;
+
+        public MenuItem(string libelle, int index, Menu sousMenu, Menu pparentMenu)
+        {
                 Libelle = libelle;
                 Index = index;
-            }
+                SousMenu = sousMenu;
+            parentMenu = pparentMenu;
+        }
+
+        public MenuItem(string libelle, int index)
+        {
+            Libelle = libelle;
+            Index = index;
+        }
     }
 
 
